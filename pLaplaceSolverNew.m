@@ -11,9 +11,6 @@ function [ u,SOL ] = pLaplaceSolverNew( T,V,fmid,p,g,varargin )
 %   Output:
 %   u    The solution of the p-Laplace type equation.
 %
-%   Note: the mass matrix M is automatically computed from
-%         T and V.
-%
 %   Optional parameters:
 %   Any optional parameters are passed straight through to the
 %   function NesterovPathFollowingNew. See
