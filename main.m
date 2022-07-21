@@ -1,4 +1,7 @@
 %%
+% More documentation here:
+%   help pLaplaceSolverNew
+%   help NesterovPathFollowingNew
 p = 1.0;   % The p of the p-Laplacian
 % This next bit is a quick-and-dirty way of generating a FEM mesh
 G = numgrid('S',52);

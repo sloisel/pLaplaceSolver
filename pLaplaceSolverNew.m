@@ -5,8 +5,7 @@ function [ u,SOL ] = pLaplaceSolverNew( T,V,fmid,p,g,varargin )
 %   Parameters:
 %   T    The array of triangles (size is m by 3)
 %   V    The array of vertices (size is n by 2)
-%   f    The forcing (this is a function handle)
-%   eta  The parameter in M + eta L, where L is the p-Laplacian
+%   fmid The forcing (this is a function handle)
 %   p    The parameter of the p-Laplacian
 %   g    The Dirichlet boundary conditions (size is n by 1)
 %   Output:
@@ -14,6 +13,12 @@ function [ u,SOL ] = pLaplaceSolverNew( T,V,fmid,p,g,varargin )
 %
 %   Note: the mass matrix M is automatically computed from
 %         T and V.
+%
+%   Optional parameters:
+%   Any optional parameters are passed straight through to the
+%   function NesterovPathFollowingNew. See
+%
+%   help NesterovPathFollowingNew
 
 if(size(V,2)==2)
     [Dx,Dy,omega] = derivativesMatrix(T,V);
@@ -62,12 +67,9 @@ else
         fnorm = (omega'*abs(fmid).^q).^(1/q);
     end
     gnormp = omega'*((dgdx.^2+dgdy.^2+dgdz.^2).^(p/2));
-%    Rstar = 2*max(max(1,sum(omega))+(dgdx.^2+dgdy.^2).^(p/2));
     Rstar = 2*(1+gnormp);
 end
-%Rstar = 2*(max(1,sum(omega))+gnormp);
 Mmid = sparse(repmat(1:m,1,size(T,2))',T(:),1/size(T,2),m,size(V,1));
-%fmid = f(Vmid);
 MmidI = Mmid(:,i);
 
 L = max(V(:,1))-min(V(:,1));

@@ -20,4 +20,10 @@ This is the p-Laplace solver described in the following paper:
 
 # How to use
 
-See the main.m file for example usage.
+See the main.m file for example usage. Some documentation strings
+can be obtained with the commands:
+
+```
+help pLaplaceSolverNew
+help NesterovPathFollowingNew
+```
