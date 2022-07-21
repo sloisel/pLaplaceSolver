@@ -5,7 +5,7 @@ function [ u,SOL ] = pLaplaceSolverNew( T,V,fmid,p,g,varargin )
 %   Parameters:
 %   T    The array of triangles (size is m by 3)
 %   V    The array of vertices (size is n by 2)
-%   fmid The forcing (this is a function handle)
+%   fmid The forcing at the midpoint of triangles
 %   p    The parameter of the p-Laplacian
 %   g    The Dirichlet boundary conditions (size is n by 1)
 %   Output:
