@@ -1,9 +1,19 @@
 function [ x,SOL ] = NesterovPathFollowingNew( c,F,x,varargin )
 %[x,SOL] = NesterovPathFollowing( c,F,x )
-%   Nesterov's path-following method to minimize c'*x subject to F<inf,
-%   starting from the given initial guess x, which much be feasible.
-%   F should be a nu-self-concordant barrier on its domain. Optional
-%   parameters can be provided as follows:
+%   The path-following algorithm described in the following paper:
+%
+%     Loisel, Sébastien. "Efficient algorithms for solving the p-Laplacian 
+%     in polynomial time." Numerische Mathematik 146.2 (2020): 369-400.
+%
+%   This algorithm is an adaptive variant of Nesterov's path-following 
+%   method to minimize c'*x subject to F<inf, wherein the size of the
+%   t-steps is selected adaptively so that each centering iteration
+%   converges in a reasonable number of damped Newton steps.
+%
+%   F should be a nu-self-concordant barrier on its domain and x
+%   is the initial guess, and x should be feasible.
+%
+%   Optional parameters can be provided as follows:
 %     'callback'  a callback function to be called at each iteration.
 %                 callback function will be called as follows:
 %                 callback(k,x,F0,G,H,t,PHASE);
@@ -23,9 +33,8 @@ function [ x,SOL ] = NesterovPathFollowingNew( c,F,x,varargin )
 %     'timeout'   If the iteration fails to converge before this number of
 %                 seconds, the optimization fails with an error message.
 %                 Default is 600 seconds.
-%     'tol'       a tolerance. If you want c'*x - cmin to be less than epsilon,
-%                 tol should be nu + sqrt(nu)/8 + 1/72. Default is
-%                 1e-6/length(c).
+%     'tol'       a tolerance. The outer iteration stops when t*tol>1.
+%                 Default is 1e-6/length(c).
 %     'verbose'   set to 1 to enable a callback function that prints all
 %                 data.
 %

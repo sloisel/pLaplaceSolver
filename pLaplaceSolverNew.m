@@ -1,6 +1,11 @@
 function [ u,SOL ] = pLaplaceSolverNew( T,V,fmid,p,g,varargin )
-%PLAPLACESOLVERNEW Solves a p-Laplace type equation\
+%PLAPLACESOLVERNEW Solves a p-Laplace type equation
 %   Solves a p-Laplace type equation L u = f.
+%
+%   The algorithm is described in the following paper:
+%
+%     Loisel, Sébastien. "Efficient algorithms for solving the p-Laplacian 
+%     in polynomial time." Numerische Mathematik 146.2 (2020): 369-400.
 %
 %   Parameters:
 %   T    The array of triangles (size is m by 3)
